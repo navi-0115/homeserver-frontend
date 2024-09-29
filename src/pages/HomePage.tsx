@@ -33,13 +33,13 @@ const Homepage = () => {
       {/* Hero Section */}
       <div className="relative h-96 bg-gray-200">
         <img
-          src="/placeholder.svg?height=400&width=800"
+          src="https://ucarecdn.com/d8ded04b-fa5f-4911-8ea9-09cf7da15b34/vishnumohananrZKdS0wI8Ksunsplash.jpg"
           alt="Hero Image"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <h1 className="text-4xl font-bold text-white">
-            Welcome to Our Store
+            Welcome to Homeserver
           </h1>
         </div>
       </div>
