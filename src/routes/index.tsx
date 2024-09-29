@@ -1,42 +1,40 @@
-import { createBrowserRouter } from "react-router-dom";
-import HomePage from "@/pages/HomePage";
-import ProductDetail from "../pages/ProductPage";
-import BaseLayout from "../components/ui/Baselayout";
-import { Product } from "@/models/Product";
+import { createBrowserRouter, useRouteError } from "react-router-dom";
 
-async function productsLoader(): Promise<Product[]> {
-  const response = await fetch(
-    "https://homeserver-backend.navingrh.com/api/products"
-  );
-  if (!response.ok) {
-    throw new Error("Failed to fetch products");
-  }
-  return response.json();
-}
+import HomePage, { loader as productsLoader } from "@/routes/HomePage";
+import ProductPage from "@/routes/ProductPage";
+import BaseLayout from "@/components/ui/Baselayout";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <BaseLayout />,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         path: "/",
         element: <HomePage />,
         loader: productsLoader,
-        // errorElement: <ErrorBoundary />,
       },
       {
         path: "/products/:id",
-        element: <ProductDetail />,
+        element: <ProductPage />,
+        // loader: productLoader,
       },
     ],
   },
 ]);
 
 function ErrorBoundary() {
+  const error = useRouteError() as any;
+  console.error(error);
+
   return (
-    <div className="text-center text-red-500">
-      An error occurred. Please try again later.
+    <div id="error-page">
+      <h1>Oops!</h1>
+      <p>Sorry, an unexpected error has occurred.</p>
+      <p>
+        <i>{error.statusText || error.message}</i>
+      </p>
     </div>
   );
 }
