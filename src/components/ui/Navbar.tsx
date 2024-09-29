@@ -8,7 +8,7 @@ const Navbar = () => {
         <Link to="/" className="text-2xl font-bold">
           Homeserver
         </Link>
-        <div className="flex-grow w-8 mx-4">
+        <div className="flex-grow  mx-4">
           <div className="relative">
             <input
               type="text"
