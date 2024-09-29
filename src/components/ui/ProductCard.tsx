@@ -1,26 +1,24 @@
 import { Link } from "react-router-dom";
-import { Product } from "../../models/Product";
+import { Product } from "@/models/Product";
 
-type ProductCardProps = {
-  product: Product;
-};
-
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard = ({ product }: { product: Product }) => {
   return (
-    <div className="border p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <img
         src={product.imageUrl}
         alt={product.name}
         className="w-full h-48 object-cover"
       />
-      <h2 className="text-xl font-semibold mt-4">{product.name}</h2>
-      <p className="text-gray-700 mt-2">${product.price}</p>
-      <Link
-        to={`/product/${product.id}`}
-        className="text-blue-500 hover:underline mt-4 block"
-      >
-        View Details
-      </Link>
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+        <p className="text-gray-600">${product.price.toFixed(2)}</p>
+        <Link
+          to={`/product/${product.id}`}
+          className="mt-4 block w-full text-center bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors"
+        >
+          View Details
+        </Link>
+      </div>
     </div>
   );
 };
