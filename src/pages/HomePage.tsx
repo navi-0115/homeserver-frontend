@@ -10,13 +10,13 @@ const Homepage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(
+        const ProductsResponse = await fetch(
           "https://homeserver-backend.navingrh.com/api/products"
         );
-        if (!response.ok) {
+        if (!ProductsResponse.ok) {
           throw new Error("Failed to fetch products");
         }
-        const data = await response.json();
+        const data = await ProductsResponse.json();
         setProducts(data);
         setLoading(false);
       } catch (err) {
