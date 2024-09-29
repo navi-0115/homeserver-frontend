@@ -1,16 +1,31 @@
+import { ShoppingCart, User, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-slate-50 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-white text-xl font-bold">
-          Home Servers
+    <nav className="bg-white shadow-md">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+        <Link to="/" className="text-2xl font-bold">
+          Logo
         </Link>
-        <div>
-          <Link to="/" className="text-gray-300 hover:text-white mx-4">
-            Home
-          </Link>
+        <div className="flex-grow mx-4">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search products..."
+              className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <Search className="absolute right-3 top-2.5 text-gray-400" />
+          </div>
+        </div>
+        <div className="flex items-center space-x-4">
+          <User className="w-6 h-6 text-gray-600 cursor-pointer" />
+          <div className="relative">
+            <ShoppingCart className="w-6 h-6 text-gray-600 cursor-pointer" />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+              3
+            </span>
+          </div>
         </div>
       </div>
     </nav>
