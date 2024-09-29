@@ -13,7 +13,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
         <p className="text-gray-600">${product.price.toFixed(2)}</p>
         <Link
-          to={`/product/${product.id}`}
+          to={`/products/${product.slug}`}
           className="mt-4 block w-full text-center bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors"
         >
           View Details

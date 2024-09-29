@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProductCard from "@/components/ui/ProductCard";
 import { Product } from "@/models/Product";
 
 const Homepage = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  const slides = [
-    "/placeholder.svg?height=400&width=800",
-    "/placeholder.svg?height=400&width=800&text=Slide+2",
-    "/placeholder.svg?height=400&width=800&text=Slide+3",
-  ];
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -36,45 +28,20 @@ const Homepage = () => {
     fetchProducts();
   }, []);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
   return (
     <div>
-      {/* Hero Slider */}
-      <div className="relative">
-        <div className="overflow-hidden">
-          <div
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-          >
-            {slides.map((slide, index) => (
-              <img
-                key={index}
-                src={slide}
-                alt={`Slide ${index + 1}`}
-                className="w-full object-cover"
-              />
-            ))}
-          </div>
+      {/* Hero Section */}
+      <div className="relative h-96 bg-gray-200">
+        <img
+          src="/placeholder.svg?height=400&width=800"
+          alt="Hero Image"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <h1 className="text-4xl font-bold text-white">
+            Welcome to Our Store
+          </h1>
         </div>
-        <button
-          onClick={prevSlide}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
       </div>
 
       {/* Product Catalog */}
