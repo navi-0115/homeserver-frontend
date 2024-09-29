@@ -1,21 +1,20 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const BaseLayout = () => {
   return (
-    <div>
-      <nav className="bg-white p-4 drop-shadow">
-        <div className="container mx-auto flex justify-between">
-          <Link to="/" className="text-black text-2xl font-bold">
-            Homeserver
-          </Link>
-          <Link to="/cart" className="text-black">
-            Cart
-          </Link>
-        </div>
-      </nav>
-      <main>
+    <div className="flex flex-col min-h-screen">
+      {/* Navbar */}
+      <Navbar />
+
+      {/* Main content with routing */}
+      <main className="flex-grow">
         <Outlet />
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

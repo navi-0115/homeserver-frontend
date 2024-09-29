@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link to="/" className="text-2xl font-bold">
-          Logo
+          Homeserver
         </Link>
         <div className="flex-grow mx-4">
           <div className="relative">
