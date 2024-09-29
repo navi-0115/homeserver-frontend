@@ -1,4 +1,4 @@
-import { createBrowserRouter, useRouteError } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
 import HomePage, { loader as productsLoader } from "@/routes/HomePage";
 import ProductPage from "@/routes/ProductPage";

@@ -11,7 +11,13 @@ const ProductCard = ({ product }: { product: Product }) => {
       />
       <div className="p-4">
         <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-        <p className="text-gray-600 ">${product.price.toFixed(2)} </p>
+        <p className="text-gray-600 ">
+          $
+          {product.price.toLocaleString("id-ID", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}{" "}
+        </p>
         <Link
           to={`/products/${product.slug}`}
           className="mt-4 block w-full text-center bg-zinc-950 text-white py-2 rounded-md hover:bg-zinc-600 transition-colors"
