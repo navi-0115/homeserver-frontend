@@ -12,11 +12,12 @@ const ProductCard = ({ product }: { product: Product }) => {
       <div className="p-4">
         <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
         <p className="text-gray-600 ">
-          $
+          Rp
           {product.price.toLocaleString("id-ID", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          })}{" "}
+          })}
+          {"  "}
         </p>
         <Link
           to={`/products/${product.slug}`}
