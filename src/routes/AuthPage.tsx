@@ -8,7 +8,7 @@ import { auth } from "@/lib/auth";
 
 export async function authLoader() {
   if (auth.isAuthenticated) {
-    return redirect("/dashboard");
+    return redirect("/");
   }
   return null;
 }
@@ -44,10 +44,9 @@ export default function AuthPage() {
   const [activeTab, setActiveTab] = useState("login");
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-white">
-      {/* Left side - Authentication Form */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-8">
-        <div className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center pb-20">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg border border-gray-200">
+        <div className="p-6">
           <Tabs
             value={activeTab}
             onValueChange={setActiveTab}
@@ -67,7 +66,7 @@ export default function AuthPage() {
                       id="login-email"
                       name="username"
                       type="email"
-                      placeholder="m@example.com"
+                      placeholder="Input your email"
                       required
                     />
                   </div>
@@ -94,7 +93,7 @@ export default function AuthPage() {
                       id="register-username"
                       name="username"
                       type="text"
-                      placeholder="John Doe"
+                      placeholder="Input your username"
                       required
                     />
                   </div>
@@ -104,7 +103,7 @@ export default function AuthPage() {
                       id="register-email"
                       name="email"
                       type="email"
-                      placeholder="m@example.com"
+                      placeholder="Input your email"
                       required
                     />
                   </div>
@@ -125,15 +124,6 @@ export default function AuthPage() {
             </div>
           </Tabs>
         </div>
-      </div>
-
-      {/* Right side - Image */}
-      <div className="w-full md:w-1/2 bg-gray-100">
-        <img
-          src="/placeholder.svg?height=800&width=800"
-          alt="Authentication visual"
-          className="w-full h-full object-cover"
-        />
       </div>
     </div>
   );
