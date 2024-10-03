@@ -1,7 +1,7 @@
 import { createBrowserRouter, useRouteError } from "react-router-dom";
 import HomePage, { loader as productsLoader } from "@/routes/HomePage";
 import AuthPage, { authLoader, authAction } from "@/routes/AuthPage";
-import ProductPage from "@/routes/ProductPage";
+// import ProductPage from "@/routes/ProductPage";
 import BaseLayout from "@/components/ui/Baselayout";
 
 export const router = createBrowserRouter([
@@ -16,8 +16,8 @@ export const router = createBrowserRouter([
         loader: productsLoader,
       },
       {
-        path: "/products/:id",
-        element: <ProductPage />,
+        // path: "/products/:id",
+        // element: <ProductPage />,
         // loader: productLoader,
       },
       {
