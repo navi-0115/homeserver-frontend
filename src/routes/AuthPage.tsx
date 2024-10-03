@@ -64,7 +64,7 @@ export default function AuthPage() {
                     <Label htmlFor="login-email">Email</Label>
                     <Input
                       id="login-email"
-                      name="username"
+                      name="email"
                       type="email"
                       placeholder="Input your email"
                       required
