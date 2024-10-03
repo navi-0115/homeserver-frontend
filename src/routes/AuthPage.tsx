@@ -93,7 +93,7 @@ export default function AuthPage() {
                       id="register-username"
                       name="name"
                       type="text"
-                      placeholder="Input your username"
+                      placeholder="Input your name"
                       required
                     />
                   </div>
