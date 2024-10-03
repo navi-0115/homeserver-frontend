@@ -21,11 +21,11 @@ export const auth = {
   },
 
   async register({
-    username,
+    name,
     email,
     password,
   }: {
-    username: string;
+    name: string;
     email: string;
     password: string;
   }) {
@@ -35,7 +35,7 @@ export const auth = {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ name, email, password }),
       }
     );
 

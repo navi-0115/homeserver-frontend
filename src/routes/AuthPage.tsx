@@ -28,7 +28,7 @@ export const authAction = async ({ request }: ActionFunctionArgs) => {
     }
   } else if (mode === "register") {
     const userRegister = {
-      username: String(formData.get("username")),
+      name: String(formData.get("name")),
       email: String(formData.get("email")),
       password: String(formData.get("password")),
     };
