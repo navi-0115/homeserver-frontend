@@ -88,7 +88,7 @@ export default function AuthPage() {
                 <Form method="post" className="space-y-4">
                   <input type="hidden" name="mode" value="register" />
                   <div className="space-y-2">
-                    <Label htmlFor="register-username">Username</Label>
+                    <Label htmlFor="register-username">Name</Label>
                     <Input
                       id="register-username"
                       name="name"
