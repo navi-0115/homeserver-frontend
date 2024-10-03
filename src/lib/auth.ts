@@ -27,11 +27,14 @@ export const auth = {
     password: string;
   }) {
     // Call backend API to register a new user
-    const response = await fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email, password }),
-    });
+    const response = await fetch(
+      import.meta.env.VITE_BACKEND_API_URL + "/api/register",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password }),
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();

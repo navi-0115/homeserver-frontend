@@ -116,7 +116,7 @@ export default function AuthPage() {
                       required
                     />
                   </div>
-                  <div className="space-y-2">
+                  {/* <div className="space-y-2">
                     <Label htmlFor="register-confirm-password">
                       Confirm Password
                     </Label>
@@ -125,7 +125,7 @@ export default function AuthPage() {
                       type="password"
                       required
                     />
-                  </div>
+                  </div> */}
                   <Button type="submit" className="w-full">
                     Register
                   </Button>
