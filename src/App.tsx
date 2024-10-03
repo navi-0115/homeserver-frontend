@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./routes/HomePage";
-import ProductPage from "./routes/ProductPage";
+// import ProductPage from "./routes/ProductPage";
 import Navbar from "./components/ui/Navbar";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/product/:slug" element={<ProductPage />} />
+        {/* <Route path="/product/:slug" element={<ProductPage />} /> */}
       </Routes>
     </Router>
   );
