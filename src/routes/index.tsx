@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import HomePage, { loader as productsLoader } from "@/routes/HomePage";
+import AuthPage, { authLoader, authAction } from "@/routes/AuthPage";
 import ProductPage from "@/routes/ProductPage";
 import BaseLayout from "@/components/ui/Baselayout";
 
@@ -19,6 +19,12 @@ export const router = createBrowserRouter([
         path: "/products/:id",
         element: <ProductPage />,
         // loader: productLoader,
+      },
+      {
+        path: "/auth",
+        element: <AuthPage />,
+        loader: authLoader,
+        action: authAction,
       },
     ],
   },
