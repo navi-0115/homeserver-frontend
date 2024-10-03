@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, useRouteError } from "react-router-dom";
 import HomePage, { loader as productsLoader } from "@/routes/HomePage";
 import AuthPage, { authLoader, authAction } from "@/routes/AuthPage";
 import ProductPage from "@/routes/ProductPage";
@@ -8,7 +8,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <BaseLayout />,
-    // errorElement: <ErrorBoundary />,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         path: "/",
@@ -30,19 +30,19 @@ export const router = createBrowserRouter([
   },
 ]);
 
-// function ErrorBoundary() {
-//   const error = useRouteError() as any;
-//   console.error(error);
+function ErrorBoundary() {
+  const error = useRouteError() as any;
+  console.error(error);
 
-//   return (
-//     <div id="error-page">
-//       <h1>Oops!</h1>
-//       <p>Sorry, an unexpected error has occurred.</p>
-//       <p>
-//         <i>{error.statusText || error.message}</i>
-//       </p>
-//     </div>
-//   );
-// }
+  return (
+    <div id="error-page">
+      <h1>Oops!</h1>
+      <p>Sorry, an unexpected error has occurred.</p>
+      <p>
+        <i>{error.statusText || error.message}</i>
+      </p>
+    </div>
+  );
+}
 
 export default router;
