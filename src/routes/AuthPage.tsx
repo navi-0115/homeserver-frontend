@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { auth } from "@/lib/auth";
+import Swal from "sweetalert2";
 
 export async function authLoader() {
   if (auth.isAuthenticated) {
@@ -19,12 +20,12 @@ export const authAction = async ({ request }: ActionFunctionArgs) => {
 
   if (mode === "login") {
     const userLogin = {
-      username: String(formData.get("username")),
+      name: String(formData.get("name")),
       password: String(formData.get("password")),
     };
     const result = await auth.login(userLogin);
     if (result) {
-      return redirect("/dashboard");
+      return redirect("/");
     }
   } else if (mode === "register") {
     const userRegister = {
@@ -34,7 +35,16 @@ export const authAction = async ({ request }: ActionFunctionArgs) => {
     };
     const result = await auth.register(userRegister);
     if (result) {
-      return redirect("/login");
+      // Trigger SweetAlert2
+      Swal.fire({
+        title: "Registration Successful",
+        text: "You have been successfully registered!",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+
+      // Redirect to login tab
+      return redirect("/auth?tab=login");
     }
   }
   return null;
@@ -42,7 +52,6 @@ export const authAction = async ({ request }: ActionFunctionArgs) => {
 
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState("login");
-
   return (
     <div className="min-h-screen flex items-center justify-center pb-20">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg border border-gray-200">
