@@ -1,14 +1,14 @@
 export const auth = {
   isAuthenticated: false,
 
-  async login({ name, password }: { name: string; password: string }) {
+  async login({ email, password }: { email: string; password: string }) {
     // Call backend API to authenticate the user
     const response = await fetch(
       import.meta.env.VITE_BACKEND_API_URL + "/auth/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, password }),
+        body: JSON.stringify({ email, password }),
       }
     );
 

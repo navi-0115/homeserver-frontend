@@ -25,6 +25,14 @@ export const authAction = async ({ request }: ActionFunctionArgs) => {
     };
     const result = await auth.login(userLogin);
     if (result) {
+      // Trigger SweetAlert2
+      Swal.fire({
+        title: "Login Successful",
+        text: "You have been successfully logged in!",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+
       return redirect("/");
     }
   } else if (mode === "register") {
