@@ -20,7 +20,7 @@ export const authAction = async ({ request }: ActionFunctionArgs) => {
 
   if (mode === "login") {
     const userLogin = {
-      name: String(formData.get("name")),
+      email: String(formData.get("email")),
       password: String(formData.get("password")),
     };
     const result = await auth.login(userLogin);
