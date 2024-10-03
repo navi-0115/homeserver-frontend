@@ -91,7 +91,7 @@ export default function AuthPage() {
                     <Label htmlFor="register-username">Username</Label>
                     <Input
                       id="register-username"
-                      name="username"
+                      name="name"
                       type="text"
                       placeholder="Input your username"
                       required

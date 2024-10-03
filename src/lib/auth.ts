@@ -3,11 +3,14 @@ export const auth = {
 
   async login({ username, password }: { username: string; password: string }) {
     // Call backend API to authenticate the user
-    const response = await fetch("/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    });
+    const response = await fetch(
+      import.meta.env.VITE_BACKEND_API_URL + "/auth/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();
@@ -28,7 +31,7 @@ export const auth = {
   }) {
     // Call backend API to register a new user
     const response = await fetch(
-      import.meta.env.VITE_BACKEND_API_URL + "/api/register",
+      import.meta.env.VITE_BACKEND_API_URL + "/auth/register",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
