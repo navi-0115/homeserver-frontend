@@ -116,6 +116,16 @@ export default function AuthPage() {
                       required
                     />
                   </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="register-confirm-password">
+                      Confirm Password
+                    </Label>
+                    <Input
+                      id="register-confirm-password"
+                      type="password"
+                      required
+                    />
+                  </div>
                   <Button type="submit" className="w-full">
                     Register
                   </Button>
