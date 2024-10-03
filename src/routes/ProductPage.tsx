@@ -17,7 +17,7 @@ const ProductPage = () => {
           alt={product.name}
           className="w-full md:w-1/2"
         />
-        <div className="md:ml-8">
+        <div className="md:ml-8 p-8">
           <h1 className="text-4xl font-bold">{product.name}</h1>
           <p className="text-gray-700 mt-4">{product.description}</p>
           <p className="text-2xl font-semibold mt-4">${product.price}</p>
