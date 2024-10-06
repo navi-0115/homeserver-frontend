@@ -1,7 +1,7 @@
 import { createBrowserRouter, useRouteError } from "react-router-dom";
 import HomePage, { loader as productsLoader } from "@/routes/HomePage";
 import AuthPage, { authLoader, authAction } from "@/routes/AuthPage";
-import ProductPage from "@/routes/ProductPage";
+import ProductPage from "@/routes/ProductDetail";
 import BaseLayout from "@/components/ui/Baselayout";
 
 export const router = createBrowserRouter([
