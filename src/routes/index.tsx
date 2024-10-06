@@ -1,8 +1,10 @@
 import { createBrowserRouter, useRouteError } from "react-router-dom";
 import HomePage, { loader as productsLoader } from "@/routes/HomePage";
 import AuthPage, { authLoader, authAction } from "@/routes/AuthPage";
-import ProductPage from "@/routes/ProductDetail";
+import ProductPage, { productDetailLoader } from "@/routes/ProductDetail";
 import BaseLayout from "@/components/ui/Baselayout";
+import { AlertCircle } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export const router = createBrowserRouter([
   {
@@ -16,9 +18,9 @@ export const router = createBrowserRouter([
         loader: productsLoader,
       },
       {
-        path: "/products/:id",
+        path: "/products/:slug",
         element: <ProductPage />,
-        // loader: productLoader,
+        loader: productDetailLoader,
       },
       {
         path: "/auth",
@@ -35,12 +37,14 @@ function ErrorBoundary() {
   console.error(error);
 
   return (
-    <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{error.statusText || error.message}</i>
-      </p>
+    <div id="error-page" className="items-center justify-center">
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>
+          <i>{error.statusText || error.message}</i>
+        </AlertDescription>
+      </Alert>
     </div>
   );
 }
