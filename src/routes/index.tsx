@@ -1,7 +1,11 @@
 import { createBrowserRouter, useRouteError } from "react-router-dom";
 import HomePage, { loader as productsLoader } from "@/routes/HomePage";
-import AuthPage, { authLoader, authAction } from "@/routes/AuthPage";
+import RegisterPage, {
+  registerAction,
+  registerLoader,
+} from "@/routes/Register";
 import ProductPage, { productDetailLoader } from "@/routes/ProductDetail";
+import LoginPage, { loginAction, loginLoader } from "@/routes/LoginPage";
 import BaseLayout from "@/components/ui/Baselayout";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -23,10 +27,16 @@ export const router = createBrowserRouter([
         loader: productDetailLoader,
       },
       {
-        path: "/auth",
-        element: <AuthPage />,
-        loader: authLoader,
-        action: authAction,
+        path: "/login",
+        element: <LoginPage />,
+        loader: loginLoader,
+        action: loginAction,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />,
+        loader: registerLoader,
+        action: registerAction,
       },
     ],
   },

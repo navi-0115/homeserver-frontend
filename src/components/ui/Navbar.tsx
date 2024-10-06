@@ -1,14 +1,31 @@
-import { ShoppingCart, User, Search } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ShoppingCart, User, Search, ChevronDown } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+// import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu"; // Make sure to import your dropdown components
 
 const Navbar = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Implement your logout logic here (e.g., call auth.logout())
+    // Then redirect to the homepage or login page
+    navigate("/login"); // Example navigation after logout
+  };
+
   return (
-    <nav className="bg-white drop-shadow ">
+    <nav className="bg-white drop-shadow">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between max-w-screen-l">
         <Link to="/" className="text-2xl font-bold">
           Homeserver
         </Link>
-        <div className="flex-grow  mx-4">
+        <div className="flex-grow mx-4">
           <div className="relative">
             <input
               type="text"
@@ -19,9 +36,25 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <Link to="/auth" className="text-2xl font-bold">
-            <User className="w-6 h-6 text-gray-600 cursor-pointer" />
-          </Link>
+          {/* Profile Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div
+                className="flex items-center cursor-pointer"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                <User className="w-6 h-6 text-gray-600" />
+                <ChevronDown className="w-4 h-4 text-gray-600 ml-1" />
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-48">
+              <DropdownMenuItem onClick={() => navigate("/profile")}>
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <div className="relative">
             <ShoppingCart className="w-6 h-6 text-gray-600 cursor-pointer" />
             <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
