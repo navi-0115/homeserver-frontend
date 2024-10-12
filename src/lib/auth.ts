@@ -1,8 +1,9 @@
+// src/lib/auth.ts
 export const auth = {
   isAuthenticated: false,
 
   async login({ email, password }: { email: string; password: string }) {
-    // Call backend API to authenticate the user
+    // Call backend API to authenticate the user and store token in cookies
     const response = await fetch(
       import.meta.env.VITE_BACKEND_API_URL + "/auth/login",
       {
@@ -17,6 +18,7 @@ export const auth = {
       this.isAuthenticated = true;
       return data;
     }
+
     return null;
   },
 
@@ -41,27 +43,46 @@ export const auth = {
 
     if (response.ok) {
       const data = await response.json();
-      return data;
+      return data; // Return registration success info
     }
+
     return null;
+  },
+
+  async logout() {
+    // Call backend API to log out the user
+    const response = await fetch(
+      import.meta.env.VITE_BACKEND_API_URL + "/auth/logout",
+      {
+        method: "POST",
+      }
+    );
+
+    if (response.ok) {
+      this.isAuthenticated = false;
+    }
   },
 };
 
-// get authenticated user
+// Fetch the authenticated user data
 export async function getAuthenticatedUser() {
-  const response = await fetch(
-    import.meta.env.VITE_BACKEND_API_URL + "/auth/me",
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
+  try {
+    const response = await fetch(
+      import.meta.env.VITE_BACKEND_API_URL + `/auth/me`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Unauthorized");
     }
-  );
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch user data");
+    const user = await response.json();
+    return user.data;
+  } catch (error) {
+    throw new Error("Unauthorized");
   }
-
-  const data = await response.json();
-  return data.data;
 }

@@ -1,26 +1,19 @@
 // src/routes/profile.tsx
-import { LoaderFunction, useLoaderData } from "react-router-dom";
+import { LoaderFunction, redirect, useLoaderData } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User } from "lucide-react";
+import { User as UserIcon } from "lucide-react";
 import { getAuthenticatedUser } from "@/lib/auth";
-import { Profile } from "@/models/User";
+import { Profile } from "@/models/User"; // Import the User type
 
+// Loader function to fetch user data or redirect if not authenticated
 export const loader: LoaderFunction = async () => {
-  const token = document.cookie.replace(
-    /(?:(?:^|.*;\s*)accessToken\s*\=\s*([^;]*).*$)|^.*$/,
-    "$1"
-  );
-
-  if (!token) {
-    throw new Response("Unauthorized", { status: 401 });
-  }
-
   try {
     const user = await getAuthenticatedUser();
     return user;
   } catch {
-    throw new Response("Failed to load user data", { status: 500 });
+    // Redirect to login if the user is not authenticated
+    return redirect("/login");
   }
 };
 
@@ -32,13 +25,12 @@ export default function ProfilePage() {
       <Card className="max-w-md mx-auto">
         <CardHeader className="flex flex-col items-center space-y-4">
           <Avatar className="w-24 h-24">
-            {/* Display avatar or fallback */}
             <AvatarImage
               src={user.avatarUrl || "/placeholder.svg?height=96&width=96"}
               alt={user.name}
             />
             <AvatarFallback>
-              <User className="w-12 h-12" />
+              <UserIcon className="w-12 h-12" />
             </AvatarFallback>
           </Avatar>
           <CardTitle className="text-2xl font-bold">{user.name}</CardTitle>
