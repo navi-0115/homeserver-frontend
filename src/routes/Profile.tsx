@@ -4,11 +4,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User as UserIcon } from "lucide-react";
 import { auth } from "@/lib/auth";
+import Swal from "sweetalert2";
 // import { Profile } from "@/models/User"; // Import the User type
 
 export async function loader() {
   const user = await auth.checkUser();
-  if (!user) return redirect("/login");
+  if (!user) {
+    Swal.fire({
+      title: "You need to login",
+      text: "Please login first before accessing the website",
+      icon: "error",
+      confirmButtonText: "OK",
+    });
+    return redirect("/login");
+  }
+
   return { user };
 }
 
