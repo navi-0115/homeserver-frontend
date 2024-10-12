@@ -46,3 +46,22 @@ export const auth = {
     return null;
   },
 };
+
+// get authenticated user
+export async function getAuthenticatedUser() {
+  const response = await fetch(
+    import.meta.env.VITE_BACKEND_API_URL + "/auth/me",
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch user data");
+  }
+
+  const data = await response.json();
+  return data.data;
+}

@@ -1,5 +1,5 @@
 // src/models/user.ts
-export type User = {
+export type Profile = {
   id: string;
   name: string;
   email: string;

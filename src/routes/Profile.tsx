@@ -4,10 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User } from "lucide-react";
 import { getAuthenticatedUser } from "@/lib/auth";
+import { Profile } from "@/models/User";
 
-// Loader function to fetch user data
 export const loader: LoaderFunction = async () => {
-  const token = localStorage.getItem("accessToken");
+  const token = document.cookie.replace(
+    /(?:(?:^|.*;\s*)accessToken\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
 
   if (!token) {
     throw new Response("Unauthorized", { status: 401 });
@@ -22,7 +25,7 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function ProfilePage() {
-  const user = useLoaderData();
+  const user = useLoaderData() as Profile;
 
   return (
     <div className="container mx-auto px-4 py-8">
