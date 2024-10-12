@@ -6,9 +6,8 @@ import { auth } from "@/lib/auth";
 import Swal from "sweetalert2";
 
 export async function loginLoader() {
-  if (auth.isAuthenticated) {
-    return redirect("/");
-  }
+  const user = await auth.checkUser();
+  if (user) return redirect("/profile");
   return null;
 }
 
@@ -21,7 +20,9 @@ export const loginAction = async ({ request }: ActionFunctionArgs) => {
       email: String(formData.get("email")),
       password: String(formData.get("password")),
     };
+
     const result = await auth.login(userLogin);
+
     if (result) {
       // Trigger SweetAlert2
       Swal.fire({
@@ -31,10 +32,22 @@ export const loginAction = async ({ request }: ActionFunctionArgs) => {
         confirmButtonText: "OK",
       });
 
-      return redirect("/");
+      // Redirect to the profile page after successful login
+      return redirect("/profile");
+    } else {
+      // Show an error message if login failed
+      Swal.fire({
+        title: "Login Failed",
+        text: "Invalid email or password.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     }
   }
+
+  return null;
 };
+
 export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center pb-20">

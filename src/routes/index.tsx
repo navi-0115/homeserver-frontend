@@ -9,7 +9,7 @@ import LoginPage, { loginAction, loginLoader } from "@/routes/LoginPage";
 import BaseLayout from "@/components/ui/Baselayout";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import ProfilePage, { loader as profileLoader } from "@/routes/Profile";
+import { UserProfilePage, loader as profileLoader } from "@/routes/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <ProfilePage />,
+        element: <UserProfilePage />,
         loader: profileLoader,
       },
     ],

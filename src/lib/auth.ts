@@ -19,7 +19,7 @@ export const auth: Auth = {
     return accessToken.get();
   },
 
-  async register(userRegister: UserRegister): Promise<Profile | null> {
+  async register(userRegister: UserRegister) {
     const response = await fetch(`${BACKEND_API_URL}/auth/register`, {
       method: "POST",
       body: JSON.stringify(userRegister),
@@ -42,14 +42,25 @@ export const auth: Auth = {
         headers: { "Content-Type": "application/json" },
       });
 
-      const data: { token?: string; user?: Profile } = await response.json();
-      if (!data.token) return null;
+      const result = await response.json();
 
-      accessToken.set(data.token);
+      // Check if the result has data and token
+      if (!result.data || !result.data.token) {
+        console.error("Token not found in response:", result);
+        return null;
+      }
+
+      // Store the access token in the token utility
+      accessToken.set(result.data.token);
       auth.isAuthenticated = true;
+
+      // Return the user data
+      return result.data;
     } catch (error) {
+      console.error("Login error:", error);
       accessToken.remove();
       auth.isAuthenticated = false;
+      return null;
     }
   },
 
