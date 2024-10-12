@@ -8,15 +8,15 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu"; // Make sure to import your dropdown components
+import { auth } from "@/lib/auth";
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Implement your logout logic here (e.g., call auth.logout())
-    // Then redirect to the homepage or login page
-    navigate("/login"); // Example navigation after logout
+    auth.logout();
+    navigate("/login");
   };
 
   return (
